@@ -1,0 +1,36 @@
+{
+  "name": "ai-classroom-assistant",
+  "version": "1.0.0",
+  "description": "Offline AI Classroom Voice Assistant",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "postinstall": "electron-builder install-app-deps",
+    "build": "electron-builder"
+  },
+  "dependencies": {
+    "node-llama-cpp": "^2.8.5"
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.aiclassroom.assistant",
+    "productName": "Classroom AI",
+    "asarUnpack": [
+      "**/*.node",
+      "**/*.dll",
+      "**/*.so",
+      "**/*.dylib",
+      "node_modules/node-llama-cpp/**",
+      "node_modules/onnxruntime-node/**"
+    ],
+    "win": {
+      "target": "nsis",
+      "extraResources": [
+        "models/**"
+      ]
+    }
+  }
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Classroom AI Assistant</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="logo">
+        <h2>AI Classroom</h2>
+      </div>
+      <div class="mode-switch-container">
+        <label class="switch">
+          <input type="checkbox" id="mode-toggle">
+          <span class="slider round"></span>
+        </label>
+        <span id="mode-label" class="mode-label">Preloaded Demo Mode</span>
+      </div>
+      <h3 class="sidebar-title">Sample Prompts</h3>
+      <div id="prompt-list" class="prompt-list">
+        <!-- Prompts injected here -->
+      </div>
+    </aside>
+    
+    <main class="main-content">
+      <div class="header">
+        <h1>Voice Assistant Dashboard</h1>
+        <div id="audio-indicator" class="audio-indicator">
+          <span>Audio Engine Idle</span>
+        </div>
+      </div>
+      
+      <div class="chat-container">
+        <pre id="chat-stream" class="chat-stream">Select a prompt from the sidebar to begin...</pre>
+      </div>
+    </main>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>
