@@ -80,10 +80,26 @@ class MockService extends EventEmitter {
     item.onStart();
     
     const { exec } = require('child_process');
+    const os = require('os');
+    const platform = os.platform();
+    
+    // Remove problematic characters for shell execution
     const safeText = item.text.replace(/"/g, '').replace(/'/g, '').replace(/`/g, '');
     
+    let command = '';
+    if (platform === 'win32') {
+        // Windows: use PowerShell with System.Speech.Synthesis
+        command = `powershell -Command "Add-Type -AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('${safeText}')"`;
+    } else if (platform === 'darwin') {
+        // macOS: use say
+        command = `say "${safeText}"`;
+    } else {
+        // Linux/fallback
+        command = `sleep 1`; 
+    }
+    
     await new Promise((resolve) => {
-        exec(`say "${safeText}"`, (error) => {
+        exec(command, (error) => {
             resolve();
         });
     });
