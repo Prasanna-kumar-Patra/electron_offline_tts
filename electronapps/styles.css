@@ -239,3 +239,72 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.whiteboard-container {
+  background-color: var(--bg-panel);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.whiteboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.whiteboard-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  background-color: #334155;
+  color: #fff;
+  transition: all 0.2s;
+}
+.btn:hover { background-color: #475569; }
+
+.btn-primary { background-color: var(--primary); }
+.btn-primary:hover { background-color: var(--primary-hover); }
+
+.btn-accent { background-color: var(--accent); }
+.btn-accent:hover { background-color: #059669; }
+
+.canvas-wrapper {
+  position: relative;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#ink-canvas {
+  display: block;
+  width: 100%;
+  cursor: crosshair;
+}
+
+.overlay-bubble {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.overlay-bubble.hidden {
+  opacity: 0;
+}

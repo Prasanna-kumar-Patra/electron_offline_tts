@@ -2,10 +2,12 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { MockService } = require('./mock-service');
 const { LlmService } = require('./llm-service');
+const { RecognitionService } = require('./recognition-service');
 
 let mainWindow;
 const mockService = new MockService();
 const llmService = new LlmService();
+const recognitionService = new RecognitionService();
 
 // State
 let isLocalMode = false; // Default to mock mode since no models are present
@@ -109,5 +111,13 @@ ipcMain.on('start-generation', async (event, promptId) => {
         );
       }
     );
+  }
+});
+
+ipcMain.handle('recognize-ink', async (event, base64Image, type) => {
+  if (type === 'math') {
+    return await recognitionService.recognizeMath(base64Image);
+  } else {
+    return await recognitionService.recognizeHandwriting(base64Image);
   }
 });

@@ -33,6 +33,21 @@
         </div>
       </div>
       
+      <div class="whiteboard-container">
+        <div class="whiteboard-header">
+          <h3>Interactive Whiteboard</h3>
+          <div class="whiteboard-actions">
+            <button id="btn-clear" class="btn">Clear</button>
+            <button id="btn-recognize-text" class="btn btn-primary">Convert to Text</button>
+            <button id="btn-recognize-math" class="btn btn-accent">Convert to Math</button>
+          </div>
+        </div>
+        <div class="canvas-wrapper">
+          <canvas id="ink-canvas" width="600" height="200"></canvas>
+          <div id="overlay-bubble" class="overlay-bubble hidden"></div>
+        </div>
+      </div>
+
       <div class="chat-container">
         <pre id="chat-stream" class="chat-stream">Select a prompt from the sidebar to begin...</pre>
       </div>

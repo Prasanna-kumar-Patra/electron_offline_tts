@@ -110,6 +110,14 @@ class MockService extends EventEmitter {
     // Process next item in queue
     this.processAudioQueue();
   }
+
+  async recognizeHandwritingMock() {
+    return new Promise(resolve => setTimeout(() => resolve("Simulated offline text: Explain photosynthesis simply."), 800));
+  }
+
+  async recognizeMathMock() {
+    return new Promise(resolve => setTimeout(() => resolve("\\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"), 800));
+  }
 }
 
 module.exports = { MockService };

@@ -76,4 +76,72 @@ document.addEventListener('DOMContentLoaded', async () => {
         modeLabel.classList.remove('text-primary');
     }
   });
+
+  // Canvas Drawing Logic
+  const canvas = document.getElementById('ink-canvas');
+  const ctx = canvas.getContext('2d');
+  let isDrawing = false;
+  
+  // Set white background
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  function startDraw(e) {
+    isDrawing = true;
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX, e.offsetY);
+  }
+  
+  function draw(e) {
+    if (!isDrawing) return;
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.strokeStyle = '#000000';
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+  }
+  
+  function stopDraw() {
+    isDrawing = false;
+  }
+  
+  canvas.addEventListener('mousedown', startDraw);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', stopDraw);
+  canvas.addEventListener('mouseout', stopDraw);
+
+  const btnClear = document.getElementById('btn-clear');
+  const btnText = document.getElementById('btn-recognize-text');
+  const btnMath = document.getElementById('btn-recognize-math');
+  const overlayBubble = document.getElementById('overlay-bubble');
+
+  btnClear.addEventListener('click', () => {
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    overlayBubble.classList.add('hidden');
+  });
+
+  async function handleRecognize(type) {
+    const base64Image = canvas.toDataURL('image/png');
+    overlayBubble.textContent = "Processing...";
+    overlayBubble.classList.remove('hidden');
+    
+    try {
+      const result = await window.electronAPI.recognizeInk(base64Image, type);
+      overlayBubble.textContent = result;
+      // Also send it to chat to show we can use it
+      currentText += `\n\n[OCR ${type.toUpperCase()}]: ${result}\nAssistant: Let me help you with that.\n`;
+      chatStream.textContent = currentText;
+      chatStream.scrollTop = chatStream.scrollHeight;
+    } catch(e) {
+      overlayBubble.textContent = "Error: " + e.message;
+    }
+    
+    setTimeout(() => {
+        overlayBubble.classList.add('hidden');
+    }, 5000);
+  }
+
+  btnText.addEventListener('click', () => handleRecognize('text'));
+  btnMath.addEventListener('click', () => handleRecognize('math'));
 });

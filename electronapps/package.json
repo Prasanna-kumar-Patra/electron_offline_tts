@@ -9,7 +9,8 @@
     "build": "electron-builder"
   },
   "dependencies": {
-    "node-llama-cpp": "^2.8.5"
+    "node-llama-cpp": "^2.8.5",
+    "onnxruntime-node": "^1.18.0"
   },
   "devDependencies": {
     "electron": "^30.0.0",
