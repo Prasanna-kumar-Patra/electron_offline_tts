@@ -1,0 +1,38 @@
+node_modules/
+# .gitignore
+
+# Ignore node_modules
+node_modules/
+
+# Ignore build artifacts
+build/
+dist/
+
+# Ignore macOS application
+*.app
+
+# Ignore model files
+models/
+
+# Ignore log files
+logs/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore editor settings
+.vscode/
+.idea/
+
+# Ignore temporary files
+tmp/
+temp/
+
+# Ignore Git metadata
+.git/
+
+# Ignore build output
+*.o
+*.dylib
+*.dll
